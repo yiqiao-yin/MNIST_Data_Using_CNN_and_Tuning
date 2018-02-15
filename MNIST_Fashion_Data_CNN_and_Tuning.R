@@ -215,7 +215,7 @@ tuning.keras.network <- function(
         layer_3 = default.layer_3
       )$acc
       )
-      print(c("Finished tuning a2 with rounds", k))
+      print(c("Finished tuning a2 with rounds", j))
     }; tune.a2; tune.a2.interval
     tune.a2.mat <- data.frame(rbind(
       tune.a2.interval, tune.a2
@@ -225,23 +225,23 @@ tuning.keras.network <- function(
     j <- tune.a2.interval[inds.a2[1,2]]
     
     # Tune the number of hidden neurons in the 3rd hidden layer:
-    tune.a2 <- NULL
-    tune.a2.interval <- seq(64,64*2,64)
-    for (k in c(tune.a2.interval)) {
+    tune.a3 <- NULL
+    tune.a3.interval <- seq(64,64*2,64)
+    for (k in c(tune.a3.interval)) {
       tune.a2 <- cbind(tune.a2, keras.network(
         layer_1 = i,
         layer_2 = j,
-        layer_3 = k
+        layer_3 = default.layer_3
       )$acc
       )
       print(c("Finished tuning a2 with rounds", k))
-    }; tune.a2; tune.a2.interval
-    tune.a2.mat <- data.frame(rbind(
-      tune.a2.interval, tune.a2
-    )); t(tune.a2.mat)
+    }; tune.a3; tune.a3.interval
+    tune.a3.mat <- data.frame(rbind(
+      tune.a3.interval, tune.a3
+    )); t(tune.a3.mat)
     print("Finished tuning the second hidden layer!")
-    inds.a2 <- which(tune.a2.mat == max(tune.a2), arr.ind = TRUE)
-    k <- tune.a2.interval[inds.a2[1,2]]
+    inds.a3 <- which(tune.a3.mat == max(tune.a3), arr.ind = TRUE)
+    k <- tune.a3.interval[inds.a3[1,2]]
     
     # Return:
     return(list(
