@@ -1,4 +1,4 @@
-##################### R interface to Keras #################
+##################### R INTERFACE TO KERAS BEGIN #################
 
 # Keras is a high-level neural networks API developed with a focus 
 # on enabling fast experimentation. Being able to go from idea to 
@@ -228,7 +228,7 @@ tuning.keras.network <- function(
     tune.a3 <- NULL
     tune.a3.interval <- seq(64,64*2,64)
     for (k in c(tune.a3.interval)) {
-      tune.a2 <- cbind(tune.a2, keras.network(
+      tune.a3 <- cbind(tune.a3, keras.network(
         layer_1 = i,
         layer_2 = j,
         layer_3 = default.layer_3
@@ -250,4 +250,10 @@ tuning.keras.network <- function(
 } # End of function
 
 # Test
-tuning.keras.network()
+tuning.keras.network(
+  default.layer_1 = i,
+  default.layer_2 = j,
+  default.layer_3 = k
+)
+
+##################### END #################
